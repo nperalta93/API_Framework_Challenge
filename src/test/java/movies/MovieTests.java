@@ -1,7 +1,8 @@
 package movies;
 
 import apiUsage.RestfulTheMovieDbApi;
-import entities.*;
+import entities.Auth;
+import entities.ValueRated;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -9,6 +10,7 @@ import org.junit.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -32,7 +34,6 @@ public class MovieTests {
     public void getMovieDetails(){
         Random rand_id = new Random();
         int id = rand_id.nextInt(700000-2)+2;
-        System.out.println(id);
         Response response = api.getMovieDetails(id);
         Assert.assertEquals("The movie does not exists on the database", 200, response.getStatusCode());
     }
@@ -47,7 +48,7 @@ public class MovieTests {
         Response sessionResponse = api.createSessionId(auth);
         String sessionId = sessionResponse.then().extract().path("session_id");
         Random rand = new Random();
-        Value value = new Value(String.valueOf(rand.nextInt(10+1)-1));
+        ValueRated value = new ValueRated(String.valueOf(rand.nextInt(10+1)-1));
         int id = rand.nextInt(700000-2)+2;
         Response response = api.rateMovie(value, id, sessionId);
         Assert.assertEquals("The result you requested could not be found", 201, response.getStatusCode());

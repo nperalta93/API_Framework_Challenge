@@ -1,10 +1,10 @@
 package entities;
 
-public class Value {
+public class ValueRated {
 
     private String value;
 
-    public Value(String value) {
+    public ValueRated(String value) {
         this.value = value;
     }
 }

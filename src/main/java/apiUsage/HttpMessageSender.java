@@ -23,6 +23,27 @@ public class HttpMessageSender {
                         andReturn();
     }
 
+    public Response postRequestToEndpoint(String endpoint){
+        String requestURL = url + endpoint;
+        return
+                given().
+                        contentType(ContentType.JSON).
+                        when().
+                        post(requestURL).
+                        andReturn();
+    }
+
+    public Response deleteRequestToEndpoint(String endpoint){
+        String requestURL = url + endpoint;
+        System.out.println(requestURL);
+        return
+                given().
+                        contentType(ContentType.JSON).
+                        when().
+                        delete(requestURL).
+                        andReturn();
+    }
+
     public Response postRequestToEndpoint (Auth credentials, String endpoint){
         String requestURL = url + endpoint;
         return
@@ -34,12 +55,34 @@ public class HttpMessageSender {
                         andReturn();
     }
 
-    public Response postRequestToEndpoint(Value value, String endpoint){
+    public Response postRequestToEndpoint(ValueRated value, String endpoint){
         String requestURL = url + endpoint;
         return
                 given().
                         contentType(ContentType.JSON).
                         body(value).
+                        when().
+                        post(requestURL).
+                        andReturn();
+    }
+
+    public Response postRequestToEndpoint(MovieList list, String endpoint){
+        String requestURL = url + endpoint;
+        return
+                given().
+                        contentType(ContentType.JSON).
+                        body(list).
+                        when().
+                        post(requestURL).
+                        andReturn();
+    }
+
+    public Response postRequestToEndpoint(Movie movie, String endpoint){
+        String requestURL = url + endpoint;
+        return
+                given().
+                        contentType(ContentType.JSON).
+                        body(movie).
                         when().
                         post(requestURL).
                         andReturn();
