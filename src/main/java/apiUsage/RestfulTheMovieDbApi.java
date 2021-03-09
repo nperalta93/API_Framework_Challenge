@@ -1,5 +1,6 @@
 package apiUsage;
 
+import entities.Value;
 import io.restassured.response.Response;
 import entities.Auth;
 
@@ -23,14 +24,24 @@ public class RestfulTheMovieDbApi {
     }
 
     public Response ValidateLogin (Auth credentials){
-        Response response = messageSender.authLogin(credentials, "/authentication/token/validate_with_login?api_key=" + this.apiKey);
+        Response response = messageSender.postRequestToEndpoint(credentials, "/authentication/token/validate_with_login?api_key=" + this.apiKey);
         return response;
     }
 
     public Response createSessionId (Auth credentials){
         Response response = messageSender.postRequestToEndpoint(credentials, "/authentication/session/new?api_key=" + this.apiKey);
         return response;
+    }
 
+    public Response getMovieDetails(int id){
+        Response response = messageSender.getRequestToEndpoint("/movie/"+ id +"?api_key=" + apiKey);
+        System.out.println(response.then().extract().path("original_title"));
+        return response;
+    }
+
+    public Response rateMovie(Value value, int id, String sessionId){
+        Response response = messageSender.postRequestToEndpoint(value, "/movie/" + id + "/rating?api_key=" + this.apiKey + "&session_id=" + sessionId);
+        return response;
     }
 
 }

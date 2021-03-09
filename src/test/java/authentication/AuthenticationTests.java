@@ -47,20 +47,10 @@ public class AuthenticationTests {
         String password = props.getProperty("password");
         String token = api.getToken();
         Auth auth = new Auth(username, password, token);
-        Response response = api.ValidateLogin(auth);
-        Response response2 = api.createSessionId(auth);
-        System.out.println(response2.then().extract().path("success"));
-        Assert.assertEquals(200, response2.getStatusCode());
-    }
-
-    /*@Test
-    public void createSessionId(){
-        Response response = api.createSessionId();
-        String session_id = response.then().extract().path("session_id");
-        System.out.println(session_id);
+        api.ValidateLogin(auth);
+        Response response = api.createSessionId(auth);
+        System.out.println(response.then().extract().path("success"));
         Assert.assertEquals(200, response.getStatusCode());
-    }*/
-
-
+    }
 
 }

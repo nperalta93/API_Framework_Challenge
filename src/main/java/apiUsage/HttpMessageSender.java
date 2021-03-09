@@ -1,6 +1,6 @@
 package apiUsage;
 
-import entities.Auth;
+import entities.*;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -23,7 +23,7 @@ public class HttpMessageSender {
                         andReturn();
     }
 
-    public Response authLogin(Auth credentials, String endpoint){
+    public Response postRequestToEndpoint (Auth credentials, String endpoint){
         String requestURL = url + endpoint;
         return
                 given().
@@ -34,13 +34,13 @@ public class HttpMessageSender {
                         andReturn();
     }
 
-    public Response postRequestToEndpoint (Auth credentials, String endpoint){
+    public Response postRequestToEndpoint(Value value, String endpoint){
         String requestURL = url + endpoint;
         return
                 given().
                         contentType(ContentType.JSON).
-                        body(credentials).
-                        when().log().body().
+                        body(value).
+                        when().
                         post(requestURL).
                         andReturn();
     }
