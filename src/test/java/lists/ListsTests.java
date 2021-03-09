@@ -76,7 +76,6 @@ public class ListsTests {
         int listId = ids.get(rand.nextInt(ids.size()));
         Movie movie = new Movie(String.valueOf(rand.nextInt(700000-2)+2));
         Response response = api.addMovie(movie, sessionId, listId);
-        response.then().extract().path("status_message");
         Assert.assertEquals("The result you requested could not be found", 201, response.getStatusCode());
     }
 
@@ -93,7 +92,6 @@ public class ListsTests {
         Random rand = new Random();
         int listId = ids.get(rand.nextInt(ids.size()));
         Response response = api.clearList(sessionId, listId, true);
-        System.out.println(response.then().extract().path("status_message"));
         Assert.assertEquals("The result you requested could not be found", 201, response.getStatusCode());
     }
 
@@ -109,8 +107,7 @@ public class ListsTests {
         List<Integer> ids = api.getListsIds(sessionId);
         Random rand = new Random();
         int listId = ids.get(rand.nextInt(ids.size()));
-        Response response = api.deleteList(sessionId, 7081357);
-        System.out.println(response.then().extract().path("status_code"));
+        Response response = api.deleteList(sessionId, listId);
         Assert.assertEquals("The result you requested could not be found", 201, response.getStatusCode());
     }
 

@@ -37,7 +37,6 @@ public class RestfulTheMovieDbApi {
 
     public Response getMovieDetails(int id){
         Response response = messageSender.getRequestToEndpoint("/movie/"+ id +"?api_key=" + apiKey);
-        System.out.println(response.then().extract().path("original_title"));
         return response;
     }
 

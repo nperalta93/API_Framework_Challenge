@@ -49,7 +49,6 @@ public class AuthenticationTests {
         Auth auth = new Auth(username, password, token);
         api.ValidateLogin(auth);
         Response response = api.createSessionId(auth);
-        System.out.println(response.then().extract().path("success"));
         Assert.assertEquals(200, response.getStatusCode());
     }
 

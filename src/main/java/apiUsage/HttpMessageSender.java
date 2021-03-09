@@ -35,7 +35,6 @@ public class HttpMessageSender {
 
     public Response deleteRequestToEndpoint(String endpoint){
         String requestURL = url + endpoint;
-        System.out.println(requestURL);
         return
                 given().
                         contentType(ContentType.JSON).
